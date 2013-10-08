@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C884D677-7ACC-4B16-AEFD-9A8B8EFCAC89</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RouteTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>88514C60-DFC3-43FD-97BE-6252015FEBB5</key>
+		<string>https://github.com/grantjbutler/RouteTest.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RouteTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>88514C60-DFC3-43FD-97BE-6252015FEBB5</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/grantjbutler/RouteTest.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>88514C60-DFC3-43FD-97BE-6252015FEBB5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>88514C60-DFC3-43FD-97BE-6252015FEBB5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RouteTest</string>
+		</dict>
+	</array>
+</dict>
+</plist>

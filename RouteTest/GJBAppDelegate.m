@@ -8,6 +8,17 @@
 
 #import "GJBAppDelegate.h"
 
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+@interface GJBAppDelegate () <NSNetServiceBrowserDelegate>
+
+@property (nonatomic) NSNetServiceBrowser *browser;
+@property (nonatomic) NSMutableArray *netServices;
+@property (nonatomic) MPMoviePlayerViewController *moviePlayerViewController;
+
+@end
+
 @implementation GJBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -16,34 +27,67 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    self.netServices = [[NSMutableArray alloc] init];
+    self.browser = [[NSNetServiceBrowser alloc] init];
+    self.browser.delegate = self;
+    [self.browser searchForServicesOfType:@"_airplay._tcp" inDomain:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChanged:) name:AVAudioSessionRouteChangeNotification object:nil];
+    
+    self.moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104161/Music/Good%20Girl%20Remix.mp3"]];
+    self.window.rootViewController = self.moviePlayerViewController;
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+- (void)routeChanged:(NSNotification *)notification {
+    AVAudioSessionRouteDescription *currentRoute = [[AVAudioSession sharedInstance] currentRoute];
+    AVAudioSessionPortDescription *airplayPort = nil;
+    
+    for (AVAudioSessionPortDescription *port in [currentRoute outputs]) {
+        if ([[port portType] isEqualToString:AVAudioSessionPortAirPlay]) {
+            airplayPort = port;
+            
+            break;
+        }
+    }
+    
+    if (!airplayPort) {
+        return;
+    }
+    
+    NSNetService *airplayNetService = nil;
+    
+    for (NSNetService *netService in self.netServices) {
+        if ([netService.name isEqualToString:airplayPort.portName]) {
+            airplayNetService = netService;
+            
+            break;
+        }
+    }
+    
+    if (!airplayNetService) {
+        return;
+    }
+    
+    NSDictionary *TXTRecord = [NSNetService dictionaryFromTXTRecordData:[airplayNetService TXTRecordData]];
+    NSData *versionData = TXTRecord[@"srcvers"];
+    NSString *softwareVersion = [[NSString alloc] initWithData:versionData encoding:NSUTF8StringEncoding];
+    
+    [self.moviePlayerViewController.moviePlayer pause];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Airplaying" message:[NSString stringWithFormat:@"You're now connected to %@, which is running version %@", airplayNetService.name, softwareVersion] delegate:nil cancelButtonTitle:@"Good to Know!" otherButtonTitles:nil];
+    [alert show];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
+    [self.netServices addObject:aNetService];
+    [aNetService resolveWithTimeout:300]; // Really large just because.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
+    [self.netServices removeObject:aNetService];
 }
 
 @end

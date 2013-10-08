@@ -19,6 +19,8 @@
 		C309AF7618039E7A0034558F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309AF5E18039E7A0034558F /* UIKit.framework */; };
 		C309AF7E18039E7A0034558F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C309AF7C18039E7A0034558F /* InfoPlist.strings */; };
 		C309AF8018039E7A0034558F /* RouteTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C309AF7F18039E7A0034558F /* RouteTestTests.m */; };
+		C309AF8A18039E830034558F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309AF8918039E830034558F /* AVFoundation.framework */; };
+		C309AF8C1803A0EB0034558F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309AF8B1803A0EB0034558F /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		C309AF7B18039E7A0034558F /* RouteTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RouteTestTests-Info.plist"; sourceTree = "<group>"; };
 		C309AF7D18039E7A0034558F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C309AF7F18039E7A0034558F /* RouteTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RouteTestTests.m; sourceTree = "<group>"; };
+		C309AF8918039E830034558F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C309AF8B1803A0EB0034558F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C309AF8C1803A0EB0034558F /* MediaPlayer.framework in Frameworks */,
+				C309AF8A18039E830034558F /* AVFoundation.framework in Frameworks */,
 				C309AF5D18039E7A0034558F /* CoreGraphics.framework in Frameworks */,
 				C309AF5F18039E7A0034558F /* UIKit.framework in Frameworks */,
 				C309AF5B18039E7A0034558F /* Foundation.framework in Frameworks */,
@@ -96,6 +102,8 @@
 		C309AF5918039E7A0034558F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C309AF8B1803A0EB0034558F /* MediaPlayer.framework */,
+				C309AF8918039E830034558F /* AVFoundation.framework */,
 				C309AF5A18039E7A0034558F /* Foundation.framework */,
 				C309AF5C18039E7A0034558F /* CoreGraphics.framework */,
 				C309AF5E18039E7A0034558F /* UIKit.framework */,
@@ -192,6 +200,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Grant Butler";
 				TargetAttributes = {
+					C309AF5618039E7A0034558F = {
+						DevelopmentTeam = JL4AKR8DVC;
+					};
 					C309AF7118039E7A0034558F = {
 						TestTargetID = C309AF5618039E7A0034558F;
 					};
@@ -360,6 +371,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouteTest/RouteTest-Prefix.pch";
 				INFOPLIST_FILE = "RouteTest/RouteTest-Info.plist";
@@ -373,6 +385,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouteTest/RouteTest-Prefix.pch";
 				INFOPLIST_FILE = "RouteTest/RouteTest-Info.plist";
