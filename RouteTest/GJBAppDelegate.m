@@ -31,7 +31,7 @@
     self.netServices = [[NSMutableArray alloc] init];
     self.browser = [[NSNetServiceBrowser alloc] init];
     self.browser.delegate = self;
-    [self.browser searchForServicesOfType:@"_airplay._tcp" inDomain:nil];
+    [self.browser searchForServicesOfType:@"_airplay._tcp" inDomain:@""];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChanged:) name:AVAudioSessionRouteChangeNotification object:nil];
     
